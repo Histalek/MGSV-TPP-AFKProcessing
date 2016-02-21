@@ -1,4 +1,4 @@
-#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 ; #Warn  ; Enable warnings to assist with detecting common errors.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
@@ -14,18 +14,20 @@ ifWinNotExist, METAL GEAR SOLID V: THE PHANTOM PAIN ; checks if MGSV-TPP is open
 	MsgBox, 0, Error - MSGV: TPP not found, METAL GEAR SOLID V: THE PHANTOM PAIN not found. Please start it before launching AFKProcessing.
 	ExitApp
 }
-Settimer, Instructions, 720000 ; calls "Instructions" every ~12 Minutes (Material Processing Rank B)
+Settimer, Instructions, 600000 ; calls "Instructions" every ~10 Minutes (Material Processing Rank A)
 Gosub Instructions ; to start the first loop immediately if wanted
 return
 
 Instructions:
 WinGetActiveTitle, old_window ; saves the currently active window
-IfWinNotActive, METAL GEAR SOLID V: THE PHANTOM PAIN ; activates MGSV-TPP if not already active
-	WinActivate, METAL GEAR SOLID V: THE PHANTOM PAIN
+IfWinNotActive, METAL GEAR SOLID V: THE PHANTOM PAIN 
+	WinActivate, METAL GEAR SOLID V: THE PHANTOM PAIN ; activates MGSV-TPP if not already active
 WinWaitActive, METAL GEAR SOLID V: THE PHANTOM PAIN ; waits till MGSV-TPP is active
-Send, {Tab}
+Send, {Enter} ; to counter the Online-Disconnect message, you won't process online resources though
 Sleep, 1000 ; needs optimization for slower/(faster) PCs
-Send, {Tab}
+Send, {Tab} ; open iDroid
+Sleep, 1000 ; needs optimization for slower/(faster) PCs
+Send, {Tab} ; close iDroid
 Sleep, 100
 WinActivate, %old_window% ; restores the active window before the loop was executed
 total_loops := total_loops + 1 ; loop count up
